@@ -11,11 +11,11 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
-public class DataDownload extends AsyncTask<String,Void,Integer> {
+public class DataDownload extends AsyncTask<String,Void,HashMap> {
 
 
-    private int glik;
 
     @Override
     protected void onPreExecute()  {
@@ -34,11 +34,13 @@ public class DataDownload extends AsyncTask<String,Void,Integer> {
     }
 
     @Override
-    protected Integer doInBackground(String... params) {
+    protected HashMap doInBackground(String... Strings) {
+
+        HashMap nutritions = new HashMap();
 
         try {
 
-            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food="+params[0]+"&attr=gi");
+            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food="+Strings[0]+"&attr=name,gi,energyKcal,protein,fat,sugars,fibre,carbohydrate,salt,cholesterol,glutenfree");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine, output = "";
@@ -51,16 +53,18 @@ public class DataDownload extends AsyncTask<String,Void,Integer> {
 
             JSONObject newArr = new JSONObject(output);
 
-            //Log.d("glikemia","Array: "+newArr.toString());
 
-            // HOW TO LOOP THROUGH RESULTS TO GET INDIVIDUAL FIELDS:
-            /*for (int i = 0; i < newArr.length(); i++) {
-                JSONObject dataObj = newArr.getJSONObject(i);
-                System.out.println(dataObj.getString("id"));
-                Log.d("glikemia",dataObj.getString("id"));
-            }*/
 
-            glik=newArr.getJSONObject("1").getJSONObject("gi").getInt("val");
+            nutritions.put("name",newArr.getJSONObject("1").getString("name"));
+            nutritions.put("fat",newArr.getJSONObject("1").getJSONObject("fat").getDouble("val"));
+            nutritions.put("sugars",newArr.getJSONObject("1").getJSONObject("sugars").getDouble("val"));
+            nutritions.put("carbohydrate",newArr.getJSONObject("1").getJSONObject("carbohydrate").getDouble("val"));
+            nutritions.put("protein",newArr.getJSONObject("1").getJSONObject("protein").getDouble("val"));
+            nutritions.put("fibre",newArr.getJSONObject("1").getJSONObject("fibre").getDouble("val"));
+            nutritions.put("salt",newArr.getJSONObject("1").getJSONObject("salt").getDouble("val"));
+            nutritions.put("cholesterol",newArr.getJSONObject("1").getJSONObject("cholesterol").getDouble("val"));
+            nutritions.put("salt",newArr.getJSONObject("1").getBoolean("glutenfree"));
+
 
 
 
@@ -69,6 +73,6 @@ public class DataDownload extends AsyncTask<String,Void,Integer> {
         }
 
 
-        return glik;
+        return nutritions;
     }
 }

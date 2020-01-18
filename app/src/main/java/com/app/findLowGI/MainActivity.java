@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
         private String food = "banana";
@@ -46,9 +50,18 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                int wynik =new DataDownload().execute(food).get();
+                HashMap results =new DataDownload().execute(food).get();
 
-                Log.d("glikemia","ostateczny wynik:"+Integer.toString(wynik));
+                Iterator hmIterator = results.entrySet().iterator();
+
+
+                while (hmIterator.hasNext()) {
+                    Map.Entry mapElement = (Map.Entry) hmIterator.next();
+
+                    Log.d("glikemia",mapElement.getKey()+": "+mapElement.getValue());
+
+                }
+
 
             }catch (Exception e)
             {
