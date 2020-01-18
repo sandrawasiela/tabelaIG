@@ -63,7 +63,7 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
             nutritions.put("fibre",newArr.getJSONObject("1").getJSONObject("fibre").getDouble("val"));
             nutritions.put("salt",newArr.getJSONObject("1").getJSONObject("salt").getDouble("val"));
             nutritions.put("cholesterol",newArr.getJSONObject("1").getJSONObject("cholesterol").getDouble("val"));
-            nutritions.put("salt",newArr.getJSONObject("1").getBoolean("glutenfree"));
+            nutritions.put("glutenfree",newArr.getJSONObject("1").getBoolean("glutenfree"));
 
 
 
