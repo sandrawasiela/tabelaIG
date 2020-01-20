@@ -2,6 +2,7 @@ package com.app.findLowGI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,13 @@ public class SecondActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d("glikemia", e.toString());
                 }
+
+
+                Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
+                startIntent.putExtra("name",food);
+                //startIntent.putExtra("Glycemicindex: ");
+                startActivityForResult(startIntent,1);
+
             }
         });
 
