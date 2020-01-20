@@ -56,6 +56,11 @@ public class DesriptionView extends AppCompatActivity {
         cholesterolId.setText(results.get("cholesterol").toString());
 
         TextView glutenfreeId = findViewById(R.id.glutenfreeId);
-        glutenfreeId.setText(results.get("glutenfree").toString());
+        if (results.get("glutenfree").toString() == "false"){
+            glutenfreeId.setText("no");
+        } else{
+            glutenfreeId.setText("yes");
+        }
+
     }
 }
