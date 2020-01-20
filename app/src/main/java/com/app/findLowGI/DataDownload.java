@@ -22,8 +22,8 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
         super.onPreExecute();
 
         Authenticator.setDefault(new Authenticator() {
-            String username="123Jan";
-            String password="glikemia";
+            String username="pawsan";
+            String password="projektowe";
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password.toCharArray());

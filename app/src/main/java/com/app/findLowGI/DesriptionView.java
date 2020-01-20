@@ -4,9 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class DesriptionView extends AppCompatActivity {
+
+    HashMap results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,9 +22,18 @@ public class DesriptionView extends AppCompatActivity {
 
         Intent startIntent = getIntent();
 
-        String food = startIntent.getStringExtra("name");
+         results = (HashMap)startIntent.getSerializableExtra("map");
+
+
+
+        Log.d("glikemia","widok opisu:"+results.get("name").toString());
+        Log.d("glikemia","widok opisu:"+results.get("glycemicindex").toString());
+        Log.d("glikemia","widok opisu:"+results.get("fat").toString());
+
+        //String food = startIntent.getStringExtra("name");
+
 
         TextView nameId = findViewById(R.id.nameId);
-        nameId.setText(food);
+        //nameId.setText(food);
     }
 }

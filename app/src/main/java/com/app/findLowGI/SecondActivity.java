@@ -16,6 +16,7 @@ import java.util.Map;
 public class SecondActivity extends AppCompatActivity {
 
     private String food;
+    private HashMap results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,9 @@ public class SecondActivity extends AppCompatActivity {
 
                     // pobieranie danych z API
 
-                    HashMap results = new DataDownload().execute(food).get();
+                    results = new DataDownload().execute(food).get();
 
-                    Iterator hmIterator = results.entrySet().iterator();
+                   /* Iterator hmIterator = results.entrySet().iterator();
 
 
                     while (hmIterator.hasNext()) {
@@ -43,7 +44,7 @@ public class SecondActivity extends AppCompatActivity {
 
                         Log.d("glikemia", mapElement.getKey() + ": " + mapElement.getValue());
 
-                    }
+                    }*/
 
 
                 } catch (Exception e) {
@@ -52,7 +53,7 @@ public class SecondActivity extends AppCompatActivity {
 
 
                 Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
-                startIntent.putExtra("name",food);
+                startIntent.putExtra("map",results);
                 //startIntent.putExtra("Glycemicindex: ");
                 startActivityForResult(startIntent,1);
 
