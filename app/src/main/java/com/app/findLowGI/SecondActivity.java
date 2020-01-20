@@ -25,6 +25,7 @@ public class SecondActivity extends AppCompatActivity {
 
         // button
         Button findButton = (Button) findViewById(R.id.findButton);
+        Button favouritesButton = (Button) findViewById(R.id.favouritesButton);
         findButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText productName = (EditText) findViewById(R.id.productName);
@@ -57,6 +58,15 @@ public class SecondActivity extends AppCompatActivity {
                 //startIntent.putExtra("Glycemicindex: ");
                 startActivityForResult(startIntent,1);
 
+            }
+
+        });
+
+        favouritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent start = new Intent(getApplicationContext(), Favourites.class);
+                startActivity(start);
             }
         });
 
