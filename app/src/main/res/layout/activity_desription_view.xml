@@ -235,7 +235,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addToFavourites"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="add to favourites" />

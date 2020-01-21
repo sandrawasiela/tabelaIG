@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -15,14 +17,17 @@ public class DesriptionView extends AppCompatActivity {
 
     HashMap results;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desription_view);
 
         Intent startIntent = getIntent();
+        final SQLHepler helper =new SQLHepler(this);
+        results = (HashMap)startIntent.getSerializableExtra("map");
 
-         results = (HashMap)startIntent.getSerializableExtra("map");
+
 
        // Log.d("glikemia","widok opisu:"+results.get("name").toString());
         //Log.d("glikemia","widok opisu:"+results.get("glycemicindex").toString());
@@ -61,6 +66,15 @@ public class DesriptionView extends AppCompatActivity {
         } else{
             glutenfreeId.setText("yes");
         }
+
+        Button addFavouritesButton = (Button) findViewById(R.id.addButton);
+
+        addFavouritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helper.addFood(results);
+            }
+        });
 
     }
 }

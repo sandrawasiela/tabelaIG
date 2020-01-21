@@ -54,7 +54,6 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
             JSONObject newArr = new JSONObject(output);
 
 
-
             nutritions.put("name",newArr.getJSONObject("1").getString("name"));
             nutritions.put("glycemicindex",newArr.getJSONObject("1").getJSONObject("gi").getInt("val"));
             nutritions.put("fat",newArr.getJSONObject("1").getJSONObject("fat").getDouble("val"));

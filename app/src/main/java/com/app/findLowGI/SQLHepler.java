@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.jar.Attributes;
 
 public class SQLHepler extends SQLiteOpenHelper {
 
@@ -42,42 +46,60 @@ public class SQLHepler extends SQLiteOpenHelper {
 
     }
 
-    public void addFood(String name, int gi, double energyKcal, double protein, double fat, double sugars, double fibre, double carbohydrate,double salt,double cholesterol,String glutenFree ){
+    public void addFood(HashMap map){
 
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("Name", name);
-        values.put("GlycemicIndex", gi);
-        values.put("EnergyKcal", energyKcal);
-        values.put("Protein", protein);
-        values.put("Fat", fat);
-        values.put("Sugars", sugars);
-        values.put("Fibre", fibre);
-        values.put("Carbohydrate", carbohydrate);
-        values.put("Salt", salt);
-        values.put("Cholesterol", cholesterol);
-        values.put("glutenfree", glutenFree);
+        Iterator hmIterator = map.entrySet().iterator();
+
+
+        while (hmIterator.hasNext()) {
+            Map.Entry mapElement = (Map.Entry) hmIterator.next();
+
+            Log.d("jedzenie", mapElement.getKey() + ": " + mapElement.getValue());
+
+        }
+
+        values.put("Name", map.get("name").toString());
+        values.put("GlycemicIndex",(Integer)map.get("glycemicindex"));
+        values.put("Protein", (Double)map.get("protein"));
+        values.put("Fat", (Double)map.get("fat"));
+        values.put("Sugars", (Double)map.get("sugars"));
+        values.put("Fibre", (Double)map.get("fibre"));
+        values.put("Carbohydrate", (Double)map.get("carbohydrate"));
+        values.put("Salt",(Double) map.get("salt"));
+        values.put("Cholesterol", (Double)map.get("cholesterol"));
+        values.put("glutenfree", map.get("glutenfree").toString());
 
         db.insert("FoodData", null, values);
 
     }
 
-    public Cursor getFoodStats (String name) {
+    public HashMap getFoodStats (String name) {
 
         String[] columns = new String[]{"Name", "GlycemicIndex", "EnergyKcal", "Protein", "Fat", "Sugars", "Fibre", "Carbohydrate", "Salt", "Cholesterol", "glutenfree"};
         SQLiteDatabase db = this.getReadableDatabase();
+        HashMap map =new HashMap();
 
 
 
-        Cursor res = db.query("FoodData", columns, "name=?", new String[]{name}, null, null, null);
-        Log.d("Cursor Object", DatabaseUtils.dumpCursorToString(res));
-        return res;
+            Cursor res = db.query("FoodData", columns, "name=?", new String[]{name}, null, null, null);
+            res.moveToFirst();
 
+            map.put("name", res.getInt(res.getColumnIndex("Name")));
+            map.put("glycemicindex", res.getInt(res.getColumnIndex("GlycemicIndex")));
+            map.put("fat", res.getInt(res.getColumnIndex("Fat")));
+            map.put("sugars", res.getInt(res.getColumnIndex("Sugars")));
+            map.put("carbohydrate", res.getInt(res.getColumnIndex("Carbohydrate")));
+            map.put("protein", res.getInt(res.getColumnIndex("Protein")));
+            map.put("fibre", res.getInt(res.getColumnIndex("Fibre")));
+            map.put("salt", res.getInt(res.getColumnIndex("Salt")));
+            map.put("cholesterol", res.getInt(res.getColumnIndex("Cholesterol")));
+            map.put("glutenfree", res.getInt(res.getColumnIndex("glutenfree")));
 
-        //Cursor res =  db.rawQuery( "select * from FoodData where Name="+name+"",null );
-
+        return map;
 
 
     }
