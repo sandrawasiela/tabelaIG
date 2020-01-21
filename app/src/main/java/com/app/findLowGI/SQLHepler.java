@@ -124,4 +124,18 @@ public class SQLHepler extends SQLiteOpenHelper {
         return food_list;
     }
 
+    public boolean isInDataBase(String name){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        cursor = db.query("FoodData",new String[]{"name"},"name=?",new String[]{name},null,null,null);
+
+        if(cursor.getCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 }
