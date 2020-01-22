@@ -3,6 +3,7 @@ package com.app.findLowGI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +42,19 @@ public class DesriptionView extends AppCompatActivity {
         TextView glycemicindexId = findViewById(R.id.glycemicindexId);
         glycemicindexId.setText(results.get("glycemicindex").toString());
 
-        TextView fatId = findViewById(R.id.fatId);
+
+        if ((results.get("glycemicindex").hashCode()) <= 55){
+            glycemicindexId.setTextColor(Color.parseColor("#1ca342"));
+        }
+        else if ((results.get("glycemicindex").hashCode()) <= 69){
+            glycemicindexId.setTextColor(Color.parseColor("#ff9100"));;
+        }
+        else {
+            glycemicindexId.setTextColor(Color.RED);
+        }
+
+
+            TextView fatId = findViewById(R.id.fatId);
         fatId.setText(results.get("fat").toString() + " g");
 
         TextView sugarsId = findViewById(R.id.sugarsId);
