@@ -13,17 +13,17 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 
-public class DataDownload extends AsyncTask<String,Void,HashMap> {
-
+public class DataDownload extends AsyncTask<String, Void, HashMap> {
 
 
     @Override
-    protected void onPreExecute()  {
+    protected void onPreExecute() {
         super.onPreExecute();
 
         Authenticator.setDefault(new Authenticator() {
-            String username="pawsan";
-            String password="projektowe";
+            String username = "pawsan";
+            String password = "projektowe";
+
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password.toCharArray());
@@ -40,7 +40,7 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
 
         try {
 
-            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food="+Strings[0]+"&attr=name,gi,energyKcal,protein,fat,sugars,fibre,carbohydrate,salt,cholesterol,glutenfree");
+            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food=" + Strings[0] + "&attr=name,gi,energyKcal,protein,fat,sugars,fibre,carbohydrate,salt,cholesterol,glutenfree");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine, output = "";
@@ -54,21 +54,19 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
             JSONObject newArr = new JSONObject(output);
 
 
-            nutritions.put("name",newArr.getJSONObject("1").getString("name"));
-            nutritions.put("glycemicindex",newArr.getJSONObject("1").getJSONObject("gi").getInt("val"));
-            nutritions.put("fat",newArr.getJSONObject("1").getJSONObject("fat").getDouble("val"));
-            nutritions.put("sugars",newArr.getJSONObject("1").getJSONObject("sugars").getDouble("val"));
-            nutritions.put("carbohydrate",newArr.getJSONObject("1").getJSONObject("carbohydrate").getDouble("val"));
-            nutritions.put("protein",newArr.getJSONObject("1").getJSONObject("protein").getDouble("val"));
-            nutritions.put("fibre",newArr.getJSONObject("1").getJSONObject("fibre").getDouble("val"));
-            nutritions.put("salt",newArr.getJSONObject("1").getJSONObject("salt").getDouble("val"));
-            nutritions.put("cholesterol",newArr.getJSONObject("1").getJSONObject("cholesterol").getDouble("val"));
-            nutritions.put("glutenfree",newArr.getJSONObject("1").getBoolean("glutenfree"));
+            nutritions.put("name", newArr.getJSONObject("1").getString("name"));
+            nutritions.put("glycemicindex", newArr.getJSONObject("1").getJSONObject("gi").getInt("val"));
+            nutritions.put("fat", newArr.getJSONObject("1").getJSONObject("fat").getDouble("val"));
+            nutritions.put("sugars", newArr.getJSONObject("1").getJSONObject("sugars").getDouble("val"));
+            nutritions.put("carbohydrate", newArr.getJSONObject("1").getJSONObject("carbohydrate").getDouble("val"));
+            nutritions.put("protein", newArr.getJSONObject("1").getJSONObject("protein").getDouble("val"));
+            nutritions.put("fibre", newArr.getJSONObject("1").getJSONObject("fibre").getDouble("val"));
+            nutritions.put("salt", newArr.getJSONObject("1").getJSONObject("salt").getDouble("val"));
+            nutritions.put("cholesterol", newArr.getJSONObject("1").getJSONObject("cholesterol").getDouble("val"));
+            nutritions.put("glutenfree", newArr.getJSONObject("1").getBoolean("glutenfree"));
 
 
-
-
-        }catch (Exception e){
+        } catch (Exception e) {
 
             return null;
         }

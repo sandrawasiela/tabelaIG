@@ -27,11 +27,11 @@ public class DesriptionView extends AppCompatActivity {
 
         Intent startIntent = getIntent();
         addFavouritesButton = (Button) findViewById(R.id.addButton);
-        helper =new SQLHepler(this);
-        results = (HashMap)startIntent.getSerializableExtra("map");
+        helper = new SQLHepler(this);
+        results = (HashMap) startIntent.getSerializableExtra("map");
         updateButton();
 
-       // Log.d("glikemia","widok opisu:"+results.get("name").toString());
+        // Log.d("glikemia","widok opisu:"+results.get("name").toString());
         //Log.d("glikemia","widok opisu:"+results.get("glycemicindex").toString());
         //Log.d("glikemia","widok opisu:"+results.get("fat").toString());
 
@@ -42,31 +42,31 @@ public class DesriptionView extends AppCompatActivity {
         glycemicindexId.setText(results.get("glycemicindex").toString());
 
         TextView fatId = findViewById(R.id.fatId);
-        fatId.setText(results.get("fat").toString()+" g");
+        fatId.setText(results.get("fat").toString() + " g");
 
         TextView sugarsId = findViewById(R.id.sugarsId);
-        sugarsId.setText(results.get("sugars").toString()+" g");
+        sugarsId.setText(results.get("sugars").toString() + " g");
 
         TextView carbohydrateId = findViewById(R.id.carbohydrateId);
-        carbohydrateId.setText(results.get("carbohydrate").toString()+" g");
+        carbohydrateId.setText(results.get("carbohydrate").toString() + " g");
 
         TextView proteinId = findViewById(R.id.proteinId);
-        proteinId.setText(results.get("protein").toString()+" g");
+        proteinId.setText(results.get("protein").toString() + " g");
 
         TextView fibreId = findViewById(R.id.fibreId);
-        fibreId.setText(results.get("fibre").toString()+" g");
+        fibreId.setText(results.get("fibre").toString() + " g");
 
-        TextView saltId= findViewById(R.id.saltId);
-        saltId.setText(results.get("salt").toString()+" g");
+        TextView saltId = findViewById(R.id.saltId);
+        saltId.setText(results.get("salt").toString() + " g");
 
-        TextView cholesterolId= findViewById(R.id.cholesterolId);
-        cholesterolId.setText(results.get("cholesterol").toString()+" mg");
+        TextView cholesterolId = findViewById(R.id.cholesterolId);
+        cholesterolId.setText(results.get("cholesterol").toString() + " mg");
 
         TextView glutenfreeId = findViewById(R.id.glutenfreeId);
 
-        if (results.get("glutenfree").toString() == "false"){
+        if (results.get("glutenfree").toString() == "false") {
             glutenfreeId.setText("no");
-        } else{
+        } else {
             glutenfreeId.setText("yes");
         }
 
@@ -75,12 +75,12 @@ public class DesriptionView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(isInDatabase==true){
+                if (isInDatabase == true) {
 
                     helper.deleteFood(results.get("name").toString());
                     updateButton();
 
-                }else{
+                } else {
 
                     helper.addFood(results);
                     updateButton();
@@ -92,17 +92,17 @@ public class DesriptionView extends AppCompatActivity {
 
     }
 
-    private void updateButton(){
+    private void updateButton() {
 
-        Log.d("glikemia",results.get("name").toString());
+        Log.d("glikemia", results.get("name").toString());
 
-        isInDatabase=helper.isInDataBase(results.get("name").toString());
+        isInDatabase = helper.isInDataBase(results.get("name").toString());
 
 
-        if(isInDatabase==true){
+        if (isInDatabase == true) {
 
             addFavouritesButton.setText("Delete from favourites");
-        }else{
+        } else {
             addFavouritesButton.setText("Add to favourites");
         }
 

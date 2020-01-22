@@ -24,15 +24,14 @@ public class Favourites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
-        helper=new SQLHepler(this);
+        helper = new SQLHepler(this);
 
         foodListView = findViewById(R.id.foodListView);
 
         list = helper.getAllFoodList();
 
 
-
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         foodListView.setAdapter(adapter);
 
         foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,9 +39,9 @@ public class Favourites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
 
-                Log.d("jedzenie",list.get(position));
-                startIntent.putExtra("map",helper.getFoodStats(list.get(position)));
-                startActivityForResult(startIntent,1);
+                Log.d("jedzenie", list.get(position));
+                startIntent.putExtra("map", helper.getFoodStats(list.get(position)));
+                startActivityForResult(startIntent, 1);
             }
         });
     }
@@ -54,7 +53,7 @@ public class Favourites extends AppCompatActivity {
         foodListView = findViewById(R.id.foodListView);
         list = helper.getAllFoodList();
 
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         foodListView.setAdapter(adapter);
 
         foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,9 +61,9 @@ public class Favourites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
 
-                Log.d("jedzenie",list.get(position));
-                startIntent.putExtra("map",helper.getFoodStats(list.get(position)));
-                startActivityForResult(startIntent,1);
+                Log.d("jedzenie", list.get(position));
+                startIntent.putExtra("map", helper.getFoodStats(list.get(position)));
+                startActivityForResult(startIntent, 1);
             }
         });
     }

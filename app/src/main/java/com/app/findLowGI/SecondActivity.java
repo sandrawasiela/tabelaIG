@@ -55,13 +55,13 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d("glikemia", e.toString());
                 }
 
-                if(results!=null) {
+                if (results != null) {
                     Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
                     startIntent.putExtra("map", results);
                     //startIntent.putExtra("Glycemicindex: ");
                     startActivityForResult(startIntent, 1);
-                }else {
-                    Toast.makeText(SecondActivity.this,"Nothing found. Please try again", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SecondActivity.this, "Nothing found. Please try again", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -76,8 +76,6 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(start);
             }
         });
-
-
 
 
     }
