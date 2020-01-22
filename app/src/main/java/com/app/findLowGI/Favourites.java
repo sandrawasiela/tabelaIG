@@ -16,19 +16,43 @@ public class Favourites extends AppCompatActivity {
 
 
     ListView foodListView;
+    ArrayList<String> list;
+    SQLHepler helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
-        final SQLHepler helper=new SQLHepler(this);
+        helper=new SQLHepler(this);
 
         foodListView = findViewById(R.id.foodListView);
 
-        final ArrayList<String> list = helper.getAllFoodList();
+        list = helper.getAllFoodList();
 
 
+
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+        foodListView.setAdapter(adapter);
+
+        foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
+
+                Log.d("jedzenie",list.get(position));
+                startIntent.putExtra("map",helper.getFoodStats(list.get(position)));
+                startActivityForResult(startIntent,1);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        foodListView = findViewById(R.id.foodListView);
+        list = helper.getAllFoodList();
 
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
         foodListView.setAdapter(adapter);
