@@ -42,25 +42,25 @@ public class DesriptionView extends AppCompatActivity {
         glycemicindexId.setText(results.get("glycemicindex").toString());
 
         TextView fatId = findViewById(R.id.fatId);
-        fatId.setText(results.get("fat").toString());
+        fatId.setText(results.get("fat").toString()+" g");
 
         TextView sugarsId = findViewById(R.id.sugarsId);
-        sugarsId.setText(results.get("sugars").toString());
+        sugarsId.setText(results.get("sugars").toString()+" g");
 
         TextView carbohydrateId = findViewById(R.id.carbohydrateId);
-        carbohydrateId.setText(results.get("carbohydrate").toString());
+        carbohydrateId.setText(results.get("carbohydrate").toString()+" g");
 
         TextView proteinId = findViewById(R.id.proteinId);
-        proteinId.setText(results.get("protein").toString());
+        proteinId.setText(results.get("protein").toString()+" g");
 
         TextView fibreId = findViewById(R.id.fibreId);
-        fibreId.setText(results.get("fibre").toString());
+        fibreId.setText(results.get("fibre").toString()+" g");
 
         TextView saltId= findViewById(R.id.saltId);
-        saltId.setText(results.get("salt").toString());
+        saltId.setText(results.get("salt").toString()+" g");
 
         TextView cholesterolId= findViewById(R.id.cholesterolId);
-        cholesterolId.setText(results.get("cholesterol").toString());
+        cholesterolId.setText(results.get("cholesterol").toString()+" mg");
 
         TextView glutenfreeId = findViewById(R.id.glutenfreeId);
 
@@ -84,6 +84,7 @@ public class DesriptionView extends AppCompatActivity {
 
                     helper.addFood(results);
                     updateButton();
+
                 }
 
             }
