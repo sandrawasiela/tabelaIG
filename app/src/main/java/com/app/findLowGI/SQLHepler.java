@@ -88,16 +88,16 @@ public class SQLHepler extends SQLiteOpenHelper {
             Cursor res = db.query("FoodData", columns, "name=?", new String[]{name}, null, null, null);
             res.moveToFirst();
 
-            map.put("name", res.getInt(res.getColumnIndex("Name")));
-            map.put("glycemicindex", res.getInt(res.getColumnIndex("GlycemicIndex")));
-            map.put("fat", res.getInt(res.getColumnIndex("Fat")));
-            map.put("sugars", res.getInt(res.getColumnIndex("Sugars")));
-            map.put("carbohydrate", res.getInt(res.getColumnIndex("Carbohydrate")));
-            map.put("protein", res.getInt(res.getColumnIndex("Protein")));
-            map.put("fibre", res.getInt(res.getColumnIndex("Fibre")));
-            map.put("salt", res.getInt(res.getColumnIndex("Salt")));
-            map.put("cholesterol", res.getInt(res.getColumnIndex("Cholesterol")));
-            map.put("glutenfree", res.getInt(res.getColumnIndex("glutenfree")));
+            map.put("name", res.getString(res.getColumnIndex("Name")));
+            map.put("glycemicindex", res.getDouble(res.getColumnIndex("GlycemicIndex")));
+            map.put("fat", res.getDouble(res.getColumnIndex("Fat")));
+            map.put("sugars", res.getDouble(res.getColumnIndex("Sugars")));
+            map.put("carbohydrate", res.getDouble(res.getColumnIndex("Carbohydrate")));
+            map.put("protein", res.getDouble(res.getColumnIndex("Protein")));
+            map.put("fibre", res.getDouble(res.getColumnIndex("Fibre")));
+            map.put("salt", res.getDouble(res.getColumnIndex("Salt")));
+            map.put("cholesterol", res.getDouble(res.getColumnIndex("Cholesterol")));
+            map.put("glutenfree", res.getString(res.getColumnIndex("glutenfree")));
 
         return map;
 

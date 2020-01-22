@@ -69,7 +69,8 @@ public class DataDownload extends AsyncTask<String,Void,HashMap> {
 
 
         }catch (Exception e){
-            Log.d("glikemia",e.toString());
+
+            return null;
         }
 
 

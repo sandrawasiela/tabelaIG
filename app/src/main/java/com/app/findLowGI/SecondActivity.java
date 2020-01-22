@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,12 +55,16 @@ public class SecondActivity extends AppCompatActivity {
                     Log.d("glikemia", e.toString());
                 }
 
+                if(results!=null) {
+                    Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
+                    startIntent.putExtra("map", results);
+                    //startIntent.putExtra("Glycemicindex: ");
+                    startActivityForResult(startIntent, 1);
+                }else {
+                    Toast.makeText(SecondActivity.this,"Nothing found. Please try again", Toast.LENGTH_SHORT).show();
 
-                Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
-                startIntent.putExtra("map",results);
-                //startIntent.putExtra("Glycemicindex: ");
-                startActivityForResult(startIntent,1);
 
+                }
             }
 
         });

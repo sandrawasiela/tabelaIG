@@ -16,7 +16,9 @@ import java.util.Map;
 public class DesriptionView extends AppCompatActivity {
 
     HashMap results;
-
+    Button addFavouritesButton;
+    SQLHepler helper;
+    boolean isInDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +26,10 @@ public class DesriptionView extends AppCompatActivity {
         setContentView(R.layout.activity_desription_view);
 
         Intent startIntent = getIntent();
-        final SQLHepler helper =new SQLHepler(this);
+        addFavouritesButton = (Button) findViewById(R.id.addButton);
+        helper =new SQLHepler(this);
         results = (HashMap)startIntent.getSerializableExtra("map");
-
-
+        updateButton();
 
        // Log.d("glikemia","widok opisu:"+results.get("name").toString());
         //Log.d("glikemia","widok opisu:"+results.get("glycemicindex").toString());
@@ -61,20 +63,47 @@ public class DesriptionView extends AppCompatActivity {
         cholesterolId.setText(results.get("cholesterol").toString());
 
         TextView glutenfreeId = findViewById(R.id.glutenfreeId);
+
         if (results.get("glutenfree").toString() == "false"){
             glutenfreeId.setText("no");
         } else{
             glutenfreeId.setText("yes");
         }
 
-        Button addFavouritesButton = (Button) findViewById(R.id.addButton);
 
         addFavouritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.addFood(results);
+
+                if(isInDatabase==true){
+
+                    helper.deleteFood(results.get("name").toString());
+                    updateButton();
+
+                }else{
+
+                    helper.addFood(results);
+                    updateButton();
+                }
+
             }
         });
+
+    }
+
+    private void updateButton(){
+
+        Log.d("glikemia",results.get("name").toString());
+
+        isInDatabase=helper.isInDataBase(results.get("name").toString());
+
+
+        if(isInDatabase==true){
+
+            addFavouritesButton.setText("Delete from favourites");
+        }else{
+            addFavouritesButton.setText("Add to favourites");
+        }
 
     }
 }
