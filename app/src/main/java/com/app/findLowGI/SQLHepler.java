@@ -3,16 +3,12 @@ package com.app.findLowGI;
         import android.content.ContentValues;
         import android.content.Context;
         import android.database.Cursor;
-        import android.database.DatabaseUtils;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteOpenHelper;
         import android.util.Log;
-
         import java.util.ArrayList;
         import java.util.HashMap;
-        import java.util.Iterator;
-        import java.util.Map;
-        import java.util.jar.Attributes;
+
 
 public class SQLHepler extends SQLiteOpenHelper {
 
@@ -52,17 +48,8 @@ public class SQLHepler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        Iterator hmIterator = map.entrySet().iterator();
 
-
-        while (hmIterator.hasNext()) {
-            Map.Entry mapElement = (Map.Entry) hmIterator.next();
-
-            Log.d("jedzenie", mapElement.getKey() + ": " + mapElement.getValue());
-
-        }
-
-        values.put("Name", map.get("name").toString());
+        values.put("Name",(String) map.get("name"));
         values.put("GlycemicIndex", (Integer) map.get("glycemicindex"));
         values.put("Protein", (Double) map.get("protein"));
         values.put("Fat", (Double) map.get("fat"));
@@ -71,7 +58,7 @@ public class SQLHepler extends SQLiteOpenHelper {
         values.put("Carbohydrate", (Double) map.get("carbohydrate"));
         values.put("Salt", (Double) map.get("salt"));
         values.put("Cholesterol", (Double) map.get("cholesterol"));
-        values.put("glutenfree", map.get("glutenfree").toString());
+        values.put("glutenfree", (String) map.get("glutenfree"));
 
         db.insert("FoodData", null, values);
 
@@ -88,7 +75,7 @@ public class SQLHepler extends SQLiteOpenHelper {
         res.moveToFirst();
 
         map.put("name", res.getString(res.getColumnIndex("Name")));
-        map.put("glycemicindex", res.getDouble(res.getColumnIndex("GlycemicIndex")));
+        map.put("glycemicindex", res.getInt(res.getColumnIndex("GlycemicIndex")));
         map.put("fat", res.getDouble(res.getColumnIndex("Fat")));
         map.put("sugars", res.getDouble(res.getColumnIndex("Sugars")));
         map.put("carbohydrate", res.getDouble(res.getColumnIndex("Carbohydrate")));

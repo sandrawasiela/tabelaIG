@@ -9,10 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
 
 public class DesriptionView extends AppCompatActivity {
 
@@ -32,9 +30,6 @@ public class DesriptionView extends AppCompatActivity {
         results = (HashMap) startIntent.getSerializableExtra("map");
         updateButton();
 
-        // Log.d("glikemia","widok opisu:"+results.get("name").toString());
-        //Log.d("glikemia","widok opisu:"+results.get("glycemicindex").toString());
-        //Log.d("glikemia","widok opisu:"+results.get("fat").toString());
 
         TextView nameId = findViewById(R.id.nameId);
         nameId.setText(results.get("name").toString());
@@ -47,14 +42,15 @@ public class DesriptionView extends AppCompatActivity {
             glycemicindexId.setTextColor(Color.parseColor("#1ca342"));
         }
         else if ((results.get("glycemicindex").hashCode()) <= 69){
-            glycemicindexId.setTextColor(Color.parseColor("#ff9100"));;
+            glycemicindexId.setTextColor(Color.parseColor("#ff9100"));
         }
         else {
             glycemicindexId.setTextColor(Color.RED);
         }
 
 
-            TextView fatId = findViewById(R.id.fatId);
+
+        TextView fatId = findViewById(R.id.fatId);
         fatId.setText(results.get("fat").toString() + " g");
 
         TextView sugarsId = findViewById(R.id.sugarsId);
@@ -77,7 +73,7 @@ public class DesriptionView extends AppCompatActivity {
 
         TextView glutenfreeId = findViewById(R.id.glutenfreeId);
 
-        if (results.get("glutenfree").toString() == "false") {
+        if ((results.get("glutenfree").toString()).equals("false")) {
             glutenfreeId.setText("no");
         } else {
             glutenfreeId.setText("yes");
@@ -107,7 +103,6 @@ public class DesriptionView extends AppCompatActivity {
 
     private void updateButton() {
 
-        Log.d("glikemia", results.get("name").toString());
 
         isInDatabase = helper.isInDataBase(results.get("name").toString());
 

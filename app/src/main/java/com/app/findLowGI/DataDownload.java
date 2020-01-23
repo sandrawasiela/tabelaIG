@@ -21,8 +21,8 @@ public class DataDownload extends AsyncTask<String, Void, HashMap> {
         super.onPreExecute();
 
         Authenticator.setDefault(new Authenticator() {
-            String username = "pawsan";
-            String password = "projektowe";
+            String username = "glikemia";
+            String password = "indexglik";
 
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -40,7 +40,7 @@ public class DataDownload extends AsyncTask<String, Void, HashMap> {
 
         try {
 
-            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food=" + Strings[0] + "&attr=name,gi,energyKcal,protein,fat,sugars,fibre,carbohydrate,salt,cholesterol,glutenfree");
+            URL url = new URL("https://www.nutritics.com/api/v1.1/LIST/food=" + Strings[0] + "&attr=name,gi,energyKcal,protein,fat,sugars,fibre,carbohydrate,salt,cholesterol,glutenfree&limit=1");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine, output = "";
@@ -48,8 +48,6 @@ public class DataDownload extends AsyncTask<String, Void, HashMap> {
                 output += inputLine;
             }
 
-            // HOW TO GET THE FIRST RESULT:
-            //Log.d("glikemia","output: "+output);
 
             JSONObject newArr = new JSONObject(output);
 
@@ -63,7 +61,7 @@ public class DataDownload extends AsyncTask<String, Void, HashMap> {
             nutritions.put("fibre", newArr.getJSONObject("1").getJSONObject("fibre").getDouble("val"));
             nutritions.put("salt", newArr.getJSONObject("1").getJSONObject("salt").getDouble("val"));
             nutritions.put("cholesterol", newArr.getJSONObject("1").getJSONObject("cholesterol").getDouble("val"));
-            nutritions.put("glutenfree", newArr.getJSONObject("1").getBoolean("glutenfree"));
+            nutritions.put("glutenfree", newArr.getJSONObject("1").getString("glutenfree"));
 
 
         } catch (Exception e) {

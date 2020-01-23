@@ -39,7 +39,6 @@ public class Favourites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
 
-                Log.d("jedzenie", list.get(position));
                 startIntent.putExtra("map", helper.getFoodStats(list.get(position)));
                 startActivityForResult(startIntent, 1);
             }
@@ -61,7 +60,6 @@ public class Favourites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
 
-                Log.d("jedzenie", list.get(position));
                 startIntent.putExtra("map", helper.getFoodStats(list.get(position)));
                 startActivityForResult(startIntent, 1);
             }

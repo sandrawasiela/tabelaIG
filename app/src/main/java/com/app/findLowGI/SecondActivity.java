@@ -9,12 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -40,16 +36,6 @@ public class SecondActivity extends AppCompatActivity {
 
                     results = new DataDownload().execute(food).get();
 
-                   /* Iterator hmIterator = results.entrySet().iterator();
-
-
-                    while (hmIterator.hasNext()) {
-                        Map.Entry mapElement = (Map.Entry) hmIterator.next();
-
-                        Log.d("glikemia", mapElement.getKey() + ": " + mapElement.getValue());
-
-                    }*/
-
 
                 } catch (Exception e) {
                     Log.d("glikemia", e.toString());
@@ -58,7 +44,6 @@ public class SecondActivity extends AppCompatActivity {
                 if (results != null) {
                     Intent startIntent = new Intent(getApplicationContext(), DesriptionView.class);
                     startIntent.putExtra("map", results);
-                    //startIntent.putExtra("Glycemicindex: ");
                     startActivityForResult(startIntent, 1);
                 } else {
                     Toast.makeText(SecondActivity.this, "Nothing found. Please try again", Toast.LENGTH_SHORT).show();
