@@ -9,9 +9,9 @@ Sandra Wasiela
 The application is used to display the glycemic index and nutritional values of the product. 
 We can find there a product that interests us and check if it is good for our health.
 We classify the glycemic index into 3 groups:
-- <55 products with a low glycemic index
-- <56; 69> products with a medium glycemic index (allowed in small quantities)
-- >70 products with a high glycemic index.
+- '<55' products with a low glycemic index
+- '<56; 69>' products with a medium glycemic index (allowed in small quantities)
+- '>70' products with a high glycemic index.
 The color of the number for the glycemic index changes depending on the group it belongs to (green – low, orange – medium, red – high).  
 This solution helps us avoid a sharp rise in blood glucose levels.
 In addition to the glycemic index, we also have information about the content of fat, sugars, carbohydrate, protein, fibre, salt, 
